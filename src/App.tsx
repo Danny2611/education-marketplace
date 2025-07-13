@@ -1,26 +1,27 @@
+// src/App.tsx
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import AppRoutes from './routes/Routes';
+import { ToastContainer } from './components/common/Toast/Toast';
+import { FavoritesProvider } from './contexts/FavoritesContext';
+import { HistoryProvider } from './contexts/HistoryContext'; 
+import ChatBot from './components/chat/ChatBot';
 
-function App() {
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <FavoritesProvider>
+        <HistoryProvider>
+        
+          <AppRoutes />
+          
+          <ToastContainer />
+          
+        </HistoryProvider>
+      </FavoritesProvider>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
