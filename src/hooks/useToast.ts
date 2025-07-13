@@ -22,13 +22,11 @@ export const useToast = () => {
     return toastUtils.loading(message);
   }, []);
 
-  
   return {
     showSuccess,
     showError,
     showWarning,
     showInfo,
     showLoading,
-    
   };
 };

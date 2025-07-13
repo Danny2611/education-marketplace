@@ -22,19 +22,20 @@ interface HistoryProviderProps {
   children: ReactNode;
 }
 
-export const HistoryProvider: React.FC<HistoryProviderProps> = ({ children }) => {
+export const HistoryProvider: React.FC<HistoryProviderProps> = ({
+  children,
+}) => {
   const [history, setHistory] = useState<Product[]>(() => {
-  try {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.history);
-    if (saved) {
-      return JSON.parse(saved);
+    try {
+      const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.history);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    } catch (error) {
+      console.error('Error parsing history from localStorage:', error);
     }
-  } catch (error) {
-    console.error('Error parsing history from localStorage:', error);
-  }
-  return [];
-});
-
+    return [];
+  });
 
   const historyCount = history.length;
 
@@ -74,8 +75,8 @@ export const HistoryProvider: React.FC<HistoryProviderProps> = ({ children }) =>
   }, []);
 
   const addToHistory = useCallback((product: Product) => {
-    setHistory(prev => {
-      const filtered = prev.filter(p => p.id !== product.id);
+    setHistory((prev) => {
+      const filtered = prev.filter((p) => p.id !== product.id);
       return [product, ...filtered].slice(0, 10); // latest 10
     });
   }, []);
@@ -85,7 +86,7 @@ export const HistoryProvider: React.FC<HistoryProviderProps> = ({ children }) =>
   }, []);
 
   const removeFromHistory = useCallback((productId: string) => {
-    setHistory(prev => prev.filter(p => p.id !== productId));
+    setHistory((prev) => prev.filter((p) => p.id !== productId));
   }, []);
 
   const value: HistoryContextType = {
@@ -97,9 +98,7 @@ export const HistoryProvider: React.FC<HistoryProviderProps> = ({ children }) =>
   };
 
   return (
-    <HistoryContext.Provider value={value}>
-      {children}
-    </HistoryContext.Provider>
+    <HistoryContext.Provider value={value}>{children}</HistoryContext.Provider>
   );
 };
 

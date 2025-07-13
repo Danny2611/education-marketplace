@@ -13,7 +13,8 @@ export const ToastContainer: React.FC = () => {
           color: '#363636',
           border: '1px solid #e5e7eb',
           borderRadius: '12px',
-          boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+          boxShadow:
+            '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
           padding: '16px',
           fontSize: '14px',
           minWidth: '320px',
@@ -23,14 +24,12 @@ export const ToastContainer: React.FC = () => {
       {(t) => (
         <ToastBar toast={t}>
           {({ icon, message }) => (
-            <div className="flex items-center space-x-3 w-full">
+            <div className="flex w-full items-center space-x-3">
               {icon}
-              <div className="flex-1">
-                {message}
-              </div>
+              <div className="flex-1">{message}</div>
               <button
                 onClick={() => toast.dismiss(t.id)}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-gray-400 transition-colors hover:text-gray-600"
               >
                 <X size={16} />
               </button>
@@ -43,7 +42,10 @@ export const ToastContainer: React.FC = () => {
 };
 
 // Custom toast functions
-export const showSuccessToast = (message: string, options?: { duration?: number }) => {
+export const showSuccessToast = (
+  message: string,
+  options?: { duration?: number },
+) => {
   toast.success(message, {
     icon: <CheckCircle className="text-green-500" size={20} />,
     duration: options?.duration || 3000,
@@ -54,7 +56,10 @@ export const showSuccessToast = (message: string, options?: { duration?: number 
   });
 };
 
-export const showErrorToast = (message: string, options?: { duration?: number }) => {
+export const showErrorToast = (
+  message: string,
+  options?: { duration?: number },
+) => {
   toast.error(message, {
     icon: <XCircle className="text-red-500" size={20} />,
     duration: options?.duration || 4000,
@@ -65,7 +70,10 @@ export const showErrorToast = (message: string, options?: { duration?: number })
   });
 };
 
-export const showWarningToast = (message: string, options?: { duration?: number }) => {
+export const showWarningToast = (
+  message: string,
+  options?: { duration?: number },
+) => {
   toast(message, {
     icon: <AlertCircle className="text-orange-500" size={20} />,
     duration: options?.duration || 3500,
@@ -76,7 +84,10 @@ export const showWarningToast = (message: string, options?: { duration?: number 
   });
 };
 
-export const showInfoToast = (message: string, options?: { duration?: number }) => {
+export const showInfoToast = (
+  message: string,
+  options?: { duration?: number },
+) => {
   toast(message, {
     icon: <Info className="text-blue-500" size={20} />,
     duration: options?.duration || 3000,
@@ -96,8 +107,6 @@ export const showLoadingToast = (message: string) => {
   });
 };
 
-
-
 // Toast utility functions
 export const toastUtils = {
   success: showSuccessToast,
@@ -105,5 +114,4 @@ export const toastUtils = {
   warning: showWarningToast,
   info: showInfoToast,
   loading: showLoadingToast,
-  
 };

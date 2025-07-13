@@ -1,16 +1,19 @@
 import { Product, ProductFilters } from '../types';
 import { PRICE_RANGES } from './constants';
 
-export const filterProducts = (products: Product[], filters: ProductFilters): Product[] => {
-  return products.filter(product => {
+export const filterProducts = (
+  products: Product[],
+  filters: ProductFilters,
+): Product[] => {
+  return products.filter((product) => {
     // Search term filter
     if (filters.searchTerm) {
       const searchLower = filters.searchTerm.toLowerCase();
-      const matchesSearch = 
+      const matchesSearch =
         product.name.toLowerCase().includes(searchLower) ||
         product.category.toLowerCase().includes(searchLower) ||
         product.instructor.toLowerCase().includes(searchLower);
-      
+
       if (!matchesSearch) return false;
     }
 
@@ -47,7 +50,7 @@ export const generateId = (): string => {
 
 export const getAIResponse = (query: string): string => {
   const lowerQuery = query.toLowerCase();
-  
+
   if (lowerQuery.includes('tiếng anh') || lowerQuery.includes('english')) {
     return 'Tôi gợi ý khoá "English for Beginners with Native Speakers" - học tiếng Anh với người bản xứ, rất phù hợp cho người mới bắt đầu!';
   }
@@ -60,7 +63,6 @@ export const getAIResponse = (query: string): string => {
   if (lowerQuery.includes('design') || lowerQuery.includes('thiết kế')) {
     return 'Tôi gợi ý "Web Design with Figma" - học thiết kế web chuyên nghiệp từ cơ bản đến nâng cao!';
   }
-  
+
   return 'Dựa trên yêu cầu của bạn, tôi gợi ý bạn xem qua danh sách khoá học của chúng tôi. Bạn có thể sử dụng chức năng lọc để tìm khoá học phù hợp!';
 };
-

@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}" // React CRA paths
+    './src/**/*.{js,jsx,ts,tsx}', // React CRA paths
   ],
   theme: {
     extend: {},
   },
   plugins: [],
-}
+};

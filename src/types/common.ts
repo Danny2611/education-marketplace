@@ -5,7 +5,6 @@ export interface ToastOptions {
   description?: string;
 }
 
-
 export interface LoadingSkeletonProps {
   count?: number;
   height?: string;

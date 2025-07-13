@@ -1,4 +1,3 @@
-
 import { Product } from '../types/product';
 
 export const mockProducts: Product[] = [
@@ -9,9 +8,11 @@ export const mockProducts: Product[] = [
     originalPrice: 399000,
     discount: 25,
     image: '/images/products/image1.jpg',
-    video :'https://www.youtube.com/watch?v=66CbTxYqCyw',
-    shortDescription: 'Học tiếng Anh giao tiếp cơ bản với giáo viên người Mỹ và Anh',
-    longDescription: 'Khóa học tiếng Anh giao tiếp cơ bản được thiết kế dành cho người mới bắt đầu. Bạn sẽ học phát âm, ngữ pháp cơ bản, từ vựng và kỹ năng giao tiếp thông qua các bài học tương tác với giáo viên bản xứ.',
+    video: 'https://www.youtube.com/watch?v=66CbTxYqCyw',
+    shortDescription:
+      'Học tiếng Anh giao tiếp cơ bản với giáo viên người Mỹ và Anh',
+    longDescription:
+      'Khóa học tiếng Anh giao tiếp cơ bản được thiết kế dành cho người mới bắt đầu. Bạn sẽ học phát âm, ngữ pháp cơ bản, từ vựng và kỹ năng giao tiếp thông qua các bài học tương tác với giáo viên bản xứ.',
     instructor: 'John Smith',
     category: 'Ngoại ngữ',
     rating: 4.8,
@@ -22,7 +23,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-02-01'),
     isNew: false,
-    isBestseller: true
+    isBestseller: true,
   },
   {
     id: '2',
@@ -31,9 +32,11 @@ export const mockProducts: Product[] = [
     originalPrice: 1099000,
     discount: 18,
     image: '/images/products/image2.jpg',
-    video :'https://www.youtube.com/watch?v=LV2m9ZNJD6o',
-    shortDescription: 'Thành thạo JavaScript ES6+ và xây dựng ứng dụng React chuyên nghiệp',
-    longDescription: 'Khóa học lập trình JavaScript nâng cao với các tính năng ES6+, async/await, closures, prototypes. Học cách xây dựng ứng dụng React từ cơ bản đến nâng cao với các dự án thực tế.',
+    video: 'https://www.youtube.com/watch?v=LV2m9ZNJD6o',
+    shortDescription:
+      'Thành thạo JavaScript ES6+ và xây dựng ứng dụng React chuyên nghiệp',
+    longDescription:
+      'Khóa học lập trình JavaScript nâng cao với các tính năng ES6+, async/await, closures, prototypes. Học cách xây dựng ứng dụng React từ cơ bản đến nâng cao với các dự án thực tế.',
     instructor: 'Nguyễn Văn Hùng',
     category: 'Lập trình',
     rating: 4.9,
@@ -44,7 +47,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-20'),
     updatedAt: new Date('2024-02-05'),
     isNew: false,
-    isBestseller: true
+    isBestseller: true,
   },
   {
     id: '3',
@@ -53,9 +56,11 @@ export const mockProducts: Product[] = [
     originalPrice: 799000,
     discount: 25,
     image: '/images/products/image3.jpg',
-    video :'https://www.youtube.com/watch?v=043TZ_QilWA',
-    shortDescription: 'Học toàn bộ chiến lược Digital Marketing và các công cụ chuyên nghiệp',
-    longDescription: 'Khóa học Digital Marketing toàn diện bao gồm SEO, SEM, Social Media Marketing, Email Marketing, Content Marketing và Analytics. Thực hành trên các dự án thực tế.',
+    video: 'https://www.youtube.com/watch?v=043TZ_QilWA',
+    shortDescription:
+      'Học toàn bộ chiến lược Digital Marketing và các công cụ chuyên nghiệp',
+    longDescription:
+      'Khóa học Digital Marketing toàn diện bao gồm SEO, SEM, Social Media Marketing, Email Marketing, Content Marketing và Analytics. Thực hành trên các dự án thực tế.',
     instructor: 'Trần Thị Minh',
     category: 'Marketing',
     rating: 4.7,
@@ -66,7 +71,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-10'),
     updatedAt: new Date('2024-01-25'),
     isNew: false,
-    isBestseller: true
+    isBestseller: true,
   },
   {
     id: '4',
@@ -75,9 +80,11 @@ export const mockProducts: Product[] = [
     originalPrice: 550000,
     discount: 18,
     image: '/images/products/image4.png',
-    video :'https://www.youtube.com/watch?v=QGSr2iJ151w',
-    shortDescription: 'Tạo ra những thiết kế UI/UX chuyên nghiệp với Figma từ cơ bản',
-    longDescription: 'Học thiết kế UI/UX chuyên nghiệp với Figma. Nắm vững nguyên lý thiết kế, tạo wireframe, prototype và design system hoàn chỉnh cho ứng dụng web và mobile.',
+    video: 'https://www.youtube.com/watch?v=QGSr2iJ151w',
+    shortDescription:
+      'Tạo ra những thiết kế UI/UX chuyên nghiệp với Figma từ cơ bản',
+    longDescription:
+      'Học thiết kế UI/UX chuyên nghiệp với Figma. Nắm vững nguyên lý thiết kế, tạo wireframe, prototype và design system hoàn chỉnh cho ứng dụng web và mobile.',
     instructor: 'Lê Thị Hoa',
     category: 'Thiết kế',
     rating: 4.6,
@@ -88,7 +95,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-08'),
     updatedAt: new Date('2024-01-22'),
     isNew: false,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '5',
@@ -97,9 +104,11 @@ export const mockProducts: Product[] = [
     originalPrice: 1599000,
     discount: 19,
     image: '/images/products/image5.JPG',
-    video :'https://www.youtube.com/watch?v=pXIYZAPXKuE',
-    shortDescription: 'Bootcamp Data Science hoàn chỉnh với Python và Machine Learning',
-    longDescription: 'Khóa học Data Science toàn diện với Python. Học pandas, numpy, matplotlib, scikit-learn và xây dựng các mô hình Machine Learning. Bao gồm các dự án thực tế và hướng dẫn nghề nghiệp.',
+    video: 'https://www.youtube.com/watch?v=pXIYZAPXKuE',
+    shortDescription:
+      'Bootcamp Data Science hoàn chỉnh với Python và Machine Learning',
+    longDescription:
+      'Khóa học Data Science toàn diện với Python. Học pandas, numpy, matplotlib, scikit-learn và xây dựng các mô hình Machine Learning. Bao gồm các dự án thực tế và hướng dẫn nghề nghiệp.',
     instructor: 'TS. Phạm Minh Đức',
     category: 'Khoa học dữ liệu',
     rating: 4.9,
@@ -110,7 +119,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-05'),
     updatedAt: new Date('2024-01-20'),
     isNew: false,
-    isBestseller: true
+    isBestseller: true,
   },
   {
     id: '6',
@@ -119,9 +128,10 @@ export const mockProducts: Product[] = [
     originalPrice: 399000,
     discount: 25,
     image: '/images/products/image6.jpg',
-    video :'https://www.youtube.com/watch?v=vLtaSPirvvg',
+    video: 'https://www.youtube.com/watch?v=vLtaSPirvvg',
     shortDescription: 'Học cơ bản về nhiếp ảnh và kỹ thuật chụp ảnh đẹp',
-    longDescription: 'Khóa học nhiếp ảnh cơ bản dành cho người mới bắt đầu. Học về composition, ánh sáng, và kỹ thuật chỉnh sửa ảnh. Phù hợp cho cả smartphone và máy ảnh chuyên nghiệp.',
+    longDescription:
+      'Khóa học nhiếp ảnh cơ bản dành cho người mới bắt đầu. Học về composition, ánh sáng, và kỹ thuật chỉnh sửa ảnh. Phù hợp cho cả smartphone và máy ảnh chuyên nghiệp.',
     instructor: 'Võ Thành Nam',
     category: 'Nhiếp ảnh',
     rating: 4.5,
@@ -132,7 +142,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-12'),
     updatedAt: new Date('2024-01-28'),
     isNew: false,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '7',
@@ -141,9 +151,10 @@ export const mockProducts: Product[] = [
     originalPrice: 999000,
     discount: 20,
     image: '/images/products/image7.jpg',
-    video :'https://www.youtube.com/watch?v=C-e_UdCdl-Y',
+    video: 'https://www.youtube.com/watch?v=C-e_UdCdl-Y',
     shortDescription: 'Học quản trị kinh doanh từ startup đến doanh nghiệp lớn',
-    longDescription: 'Khóa học quản trị kinh doanh toàn diện bao gồm chiến lược, tài chính, marketing, nhân sự và vận hành. Phù hợp cho cả người mới khởi nghiệp và quản lý doanh nghiệp.',
+    longDescription:
+      'Khóa học quản trị kinh doanh toàn diện bao gồm chiến lược, tài chính, marketing, nhân sự và vận hành. Phù hợp cho cả người mới khởi nghiệp và quản lý doanh nghiệp.',
     instructor: 'MBA Nguyễn Thành Công',
     category: 'Kinh doanh',
     rating: 4.8,
@@ -154,7 +165,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-03'),
     updatedAt: new Date('2024-01-18'),
     isNew: false,
-    isBestseller: true
+    isBestseller: true,
   },
   {
     id: '8',
@@ -163,9 +174,10 @@ export const mockProducts: Product[] = [
     originalPrice: 499000,
     discount: 20,
     image: '/images/products/image8.jpg',
-    video :'https://www.youtube.com/watch?v=YjkqSdp24jE.',
+    video: 'https://www.youtube.com/watch?v=YjkqSdp24jE.',
     shortDescription: 'Học guitar và keyboard cơ bản từ con số 0',
-    longDescription: 'Khóa học âm nhạc cơ bản dành cho người mới bắt đầu. Học guitar acoustic, electric và keyboard. Bao gồm lý thuyết âm nhạc, hòa âm và thực hành các bài hát phổ biến.',
+    longDescription:
+      'Khóa học âm nhạc cơ bản dành cho người mới bắt đầu. Học guitar acoustic, electric và keyboard. Bao gồm lý thuyết âm nhạc, hòa âm và thực hành các bài hát phổ biến.',
     instructor: 'Nghệ sĩ Trần Minh Tâm',
     category: 'Âm nhạc',
     rating: 4.6,
@@ -176,7 +188,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-25'),
     updatedAt: new Date('2024-02-08'),
     isNew: true,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '9',
@@ -185,9 +197,10 @@ export const mockProducts: Product[] = [
     originalPrice: 299000,
     discount: 33,
     image: '/images/products/image9.jpg',
-    video :'https://www.youtube.com/watch?v=RvOs1c48vZM',
+    video: 'https://www.youtube.com/watch?v=RvOs1c48vZM',
     shortDescription: 'Học yoga cơ bản và thiền định để cải thiện sức khỏe',
-    longDescription: 'Khóa học yoga và thiền định toàn diện giúp cải thiện sức khỏe thể chất và tinh thần. Bao gồm các tư thế yoga cơ bản, kỹ thuật thở và thiền định mindfulness.',
+    longDescription:
+      'Khóa học yoga và thiền định toàn diện giúp cải thiện sức khỏe thể chất và tinh thần. Bao gồm các tư thế yoga cơ bản, kỹ thuật thở và thiền định mindfulness.',
     instructor: 'Cô Nguyễn Linh Chi',
     category: 'Sức khỏe',
     rating: 4.7,
@@ -198,7 +211,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-02-01'),
     updatedAt: new Date('2024-02-10'),
     isNew: true,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '10',
@@ -207,9 +220,10 @@ export const mockProducts: Product[] = [
     originalPrice: 599000,
     discount: 25,
     image: '/images/products/image10.png',
-    video :'https://www.youtube.com/watch?v=afi6dAgB1vM',
+    video: 'https://www.youtube.com/watch?v=afi6dAgB1vM',
     shortDescription: 'Học tiếng Nhật từ cơ bản với giáo viên người Nhật',
-    longDescription: 'Khóa học tiếng Nhật cơ bản bao gồm bảng chữ cái Hiragana, Katakana, Kanji cơ bản và giao tiếp hàng ngày. Được giảng dạy bởi giáo viên người Nhật bản xứ.',
+    longDescription:
+      'Khóa học tiếng Nhật cơ bản bao gồm bảng chữ cái Hiragana, Katakana, Kanji cơ bản và giao tiếp hàng ngày. Được giảng dạy bởi giáo viên người Nhật bản xứ.',
     instructor: 'Tanaka Sensei',
     category: 'Ngoại ngữ',
     rating: 4.8,
@@ -220,7 +234,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-30'),
     updatedAt: new Date('2024-02-12'),
     isNew: true,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '11',
@@ -229,9 +243,11 @@ export const mockProducts: Product[] = [
     originalPrice: 1199000,
     discount: 25,
     image: '/images/products/image11.JPG',
-    video :'https://www.youtube.com/watch?v=47ovHC78j_Q',
-    shortDescription: 'Hướng dẫn khởi nghiệp từ A-Z và xây dựng startup thành công',
-    longDescription: 'Khóa học khởi nghiệp toàn diện từ việc tìm ý tưởng, xây dựng business plan, tìm kiếm vốn đầu tư, xây dựng team và scale business. Bao gồm case study thực tế.',
+    video: 'https://www.youtube.com/watch?v=47ovHC78j_Q',
+    shortDescription:
+      'Hướng dẫn khởi nghiệp từ A-Z và xây dựng startup thành công',
+    longDescription:
+      'Khóa học khởi nghiệp toàn diện từ việc tìm ý tưởng, xây dựng business plan, tìm kiếm vốn đầu tư, xây dựng team và scale business. Bao gồm case study thực tế.',
     instructor: 'CEO Lê Minh Tú',
     category: 'Kinh doanh',
     rating: 4.9,
@@ -242,7 +258,7 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-02-05'),
     updatedAt: new Date('2024-02-15'),
     isNew: true,
-    isBestseller: false
+    isBestseller: false,
   },
   {
     id: '12',
@@ -251,9 +267,10 @@ export const mockProducts: Product[] = [
     originalPrice: 899000,
     discount: 22,
     image: '/images/products/image12.JPG',
-    video :'https://www.youtube.com/watch?v=Q3NO61fOrpE',
+    video: 'https://www.youtube.com/watch?v=Q3NO61fOrpE',
     shortDescription: 'Thành thạo Photoshop và Illustrator để thiết kế đồ họa',
-    longDescription: 'Khóa học thiết kế đồ họa với Adobe Photoshop và Illustrator. Học cách chỉnh sửa ảnh, tạo logo, poster, brochure và các sản phẩm thiết kế khác một cách chuyên nghiệp.',
+    longDescription:
+      'Khóa học thiết kế đồ họa với Adobe Photoshop và Illustrator. Học cách chỉnh sửa ảnh, tạo logo, poster, brochure và các sản phẩm thiết kế khác một cách chuyên nghiệp.',
     instructor: 'Thầy Nguyễn Đức Anh',
     category: 'Thiết kế',
     rating: 4.7,
@@ -264,8 +281,8 @@ export const mockProducts: Product[] = [
     createdAt: new Date('2024-01-18'),
     updatedAt: new Date('2024-02-02'),
     isNew: false,
-    isBestseller: true
-  }
+    isBestseller: true,
+  },
 ];
 
 export const categories = [
@@ -278,7 +295,7 @@ export const categories = [
   'Nhiếp ảnh',
   'Kinh doanh',
   'Âm nhạc',
-  'Sức khỏe'
+  'Sức khỏe',
 ];
 
 export const instructors = [
@@ -293,9 +310,13 @@ export const instructors = [
   'Cô Nguyễn Linh Chi',
   'Tanaka Sensei',
   'CEO Lê Minh Tú',
-  'Thầy Nguyễn Đức Anh'
+  'Thầy Nguyễn Đức Anh',
 ];
 
-export const featuredProducts = mockProducts.filter(product => product.isBestseller);
-export const newProducts = mockProducts.filter(product => product.isNew);
-export const discountedProducts = mockProducts.filter(product => product.discount && product.discount > 0);
+export const featuredProducts = mockProducts.filter(
+  (product) => product.isBestseller,
+);
+export const newProducts = mockProducts.filter((product) => product.isNew);
+export const discountedProducts = mockProducts.filter(
+  (product) => product.discount && product.discount > 0,
+);

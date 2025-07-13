@@ -1,5 +1,5 @@
-import { ChatBotState } from "./chat";
-import { Product, ProductFilters } from "./product";
+import { ChatBotState } from './chat';
+import { Product, ProductFilters } from './product';
 
 export interface UseProductsReturn {
   products: Product[];
@@ -17,5 +17,5 @@ export interface UseChatReturn {
   sendMessage: (message: string) => Promise<void>;
   toggleChat: () => void;
   clearChat: () => void;
-    messagesEndRef: React.RefObject<HTMLDivElement | null> ;
+  messagesEndRef: React.RefObject<HTMLDivElement | null>;
 }

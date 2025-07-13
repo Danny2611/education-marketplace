@@ -1,5 +1,5 @@
-import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PaginationControlsProps {
   currentPage: number;
@@ -14,7 +14,7 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
   onPageChange,
 }) => {
   const getPageNumbers = () => {
-    const pages: (number | "...")[] = [];
+    const pages: (number | '...')[] = [];
     const maxPagesToShow = 5;
 
     if (totalPages <= maxPagesToShow) {
@@ -32,7 +32,7 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
       }
 
       if (start > 2) {
-        pages.push("...");
+        pages.push('...');
       }
 
       for (let i = start; i <= end; i++) {
@@ -40,7 +40,7 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
       }
 
       if (end < totalPages - 1) {
-        pages.push("...");
+        pages.push('...');
       }
 
       pages.push(totalPages);
@@ -52,15 +52,15 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="mt-6 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 ">
+    <div className="mt-6 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3">
       {/* Previous button */}
       <button
         onClick={() => onPageChange(Math.max(currentPage - 1, 1))}
         disabled={currentPage === 1}
         className={`flex items-center rounded px-3 py-1 ${
           currentPage === 1
-            ? "cursor-not-allowed text-gray-400"
-            : "bg-blue-600 text-white hover:bg-blue-500 "
+            ? 'cursor-not-allowed text-gray-400'
+            : 'bg-blue-600 text-white hover:bg-blue-500'
         }`}
       >
         <ChevronLeft className="mr-1 h-4 w-4" />
@@ -70,21 +70,18 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
       {/* Page numbers with ellipsis */}
       <div className="flex items-center space-x-1">
         {pageNumbers.map((page, index) =>
-          page === "..." ? (
-            <span
-              key={`ellipsis-${index}`}
-              className="px-2 text-gray-400 "
-            >
+          page === '...' ? (
+            <span key={`ellipsis-${index}`} className="px-2 text-gray-400">
               ...
             </span>
           ) : (
             <button
               key={page}
-              onClick={() => typeof page === "number" && onPageChange(page)}
+              onClick={() => typeof page === 'number' && onPageChange(page)}
               className={`h-8 w-8 rounded ${
                 currentPage === page
-                  ? "bg-blue-600 text-white"
-                  : "text-gray-600 hover:bg-gray-100 "
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
               {page}
@@ -99,8 +96,8 @@ export const PaginationControls: React.FC<PaginationControlsProps> = ({
         disabled={currentPage === totalPages}
         className={`flex items-center rounded px-3 py-1 ${
           currentPage === totalPages
-            ? "cursor-not-allowed text-gray-400"
-            : "bg-blue-600 text-white hover:bg-blue-500 "
+            ? 'cursor-not-allowed text-gray-400'
+            : 'bg-blue-600 text-white hover:bg-blue-500'
         }`}
       >
         Tiếp

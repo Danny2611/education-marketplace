@@ -34,7 +34,12 @@ export interface ProductFilters {
 }
 
 export type PriceRange = 'all' | 'low' | 'medium' | 'high';
-export type SortOption = 'name' | 'price' | 'rating' | 'studentsCount' | 'createdAt';
+export type SortOption =
+  | 'name'
+  | 'price'
+  | 'rating'
+  | 'studentsCount'
+  | 'createdAt';
 export type SortOrder = 'asc' | 'desc';
 
 export interface UseProductsReturn {
