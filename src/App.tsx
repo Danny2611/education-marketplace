@@ -13,7 +13,6 @@ const App: React.FC = () => {
       <FavoritesProvider>
         <HistoryProvider>
           <AppRoutes />
-
           <ToastContainer />
         </HistoryProvider>
       </FavoritesProvider>

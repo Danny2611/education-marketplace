@@ -8,6 +8,7 @@ import {
   SortOrder,
 } from '../../types/product';
 import { CATEGORIES, LEVELS } from '../../utils/constants';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface ProductFilterProps {
   filters: ProductFilters;
@@ -23,9 +24,23 @@ export const ProductFilter: React.FC<ProductFilterProps> = ({
   className = '',
 }) => {
   const [showMobileFilters, setShowMobileFilters] = React.useState(false);
+  const [searchTerm, setSearchTerm] = React.useState(filters.searchTerm || '');
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  React.useEffect(() => {
+    onFiltersChange({ searchTerm: debouncedSearchTerm });
+  }, [debouncedSearchTerm, onFiltersChange]);
+
+  // Sync local searchTerm state with filters.searchTerm when filters change
+  React.useEffect(() => {
+    if (filters.searchTerm !== searchTerm) {
+      setSearchTerm(filters.searchTerm || '');
+    }
+  }, [filters.searchTerm]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onFiltersChange({ searchTerm: e.target.value });
+    setSearchTerm(e.target.value);
   };
 
   const handleCategoryChange = (category: string) => {
@@ -78,7 +93,7 @@ export const ProductFilter: React.FC<ProductFilterProps> = ({
         <input
           type="text"
           placeholder="Tìm kiếm khóa học..."
-          value={filters.searchTerm}
+          value={searchTerm}
           onChange={handleSearchChange}
           className="w-full rounded-lg border border-gray-300 py-4 pl-12 pr-4 text-xl outline-none transition-all focus:border-transparent focus:ring-2 focus:ring-blue-500"
         />

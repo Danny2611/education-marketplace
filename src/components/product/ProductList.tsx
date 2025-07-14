@@ -12,6 +12,9 @@ interface ProductListProps {
   onViewDetails?: (product: Product) => void;
   className?: string;
   emptyMessage?: string;
+  isSelectionMode?: boolean;
+  selectedItems?: Set<string>;
+  onToggleSelection?: (productId: string) => void;
 }
 
 export const ProductList: React.FC<ProductListProps> = ({
@@ -23,6 +26,9 @@ export const ProductList: React.FC<ProductListProps> = ({
   onViewDetails,
   className = '',
   emptyMessage = 'Không tìm thấy khóa học nào',
+  isSelectionMode = false,
+  selectedItems = new Set(),
+  onToggleSelection,
 }) => {
   if (loading) {
     return (
@@ -101,6 +107,9 @@ export const ProductList: React.FC<ProductListProps> = ({
           isFavorite={favorites.has(product.id)}
           onToggleFavorite={onToggleFavorite}
           onViewDetails={onViewDetails}
+          isSelectionMode={isSelectionMode}
+          isSelected={selectedItems.has(product.id)}
+          onToggleSelection={onToggleSelection}
         />
       ))}
     </div>

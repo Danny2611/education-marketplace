@@ -1,7 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
-import { Heart, Trash2, Share2 } from 'lucide-react';
+import {
+  Heart,
+  Trash2,
+  Share2,
+  CheckSquare,
+  Square,
+  X,
+  Eye,
+} from 'lucide-react';
 
 import { ProductList } from '../components/product/ProductList';
 import { showInfoToast } from '../components/common/Toast/Toast';
@@ -9,6 +17,7 @@ import { PaginationControls } from '../components/common/PaginationControls';
 
 import { useProducts } from '../hooks/useProducts';
 import { useToast } from '../hooks/useToast';
+import { useDebounce } from '../hooks/useDebounce';
 
 import { useFavoritesContext } from '../contexts/FavoritesContext';
 import { useHistoryContext } from '../contexts/HistoryContext';
@@ -32,23 +41,31 @@ export const FavoritesPage: React.FC = () => {
   const itemsPerPage = 9;
 
   const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
   const [sortBy, setSortBy] = useState<
     'name' | 'price' | 'rating' | 'dateAdded'
   >('dateAdded');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
+  // States for selection mode
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
+
   React.useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, sortBy, sortOrder, favoriteProducts]);
+  }, [debouncedSearchTerm, sortBy, sortOrder, favoriteProducts]);
 
   const filteredFavorites = useMemo(() => {
     let filtered = [...favoriteProducts];
 
-    if (searchTerm) {
+    if (debouncedSearchTerm) {
       filtered = filtered.filter(
         (product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.category.toLowerCase().includes(searchTerm.toLowerCase()),
+          product.name
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase()) ||
+          product.category
+            .toLowerCase()
+            .includes(debouncedSearchTerm.toLowerCase()),
       );
     }
 
@@ -85,7 +102,7 @@ export const FavoritesPage: React.FC = () => {
     });
 
     return filtered;
-  }, [favoriteProducts, searchTerm, sortBy, sortOrder]);
+  }, [favoriteProducts, debouncedSearchTerm, sortBy, sortOrder]);
 
   const paginatedFavorites = filteredFavorites.slice(
     (currentPage - 1) * itemsPerPage,
@@ -94,6 +111,11 @@ export const FavoritesPage: React.FC = () => {
   const totalPages = Math.ceil(filteredFavorites.length / itemsPerPage);
 
   const handleLike = (productId: string) => {
+    if (isSelectionMode) {
+      handleToggleSelection(productId);
+      return;
+    }
+
     const product = products.find((p) => p.id === productId);
     if (!product) return;
 
@@ -102,6 +124,10 @@ export const FavoritesPage: React.FC = () => {
   };
 
   const handleViewDetails = (product: any) => {
+    if (isSelectionMode) {
+      handleToggleSelection(product.id);
+      return;
+    }
     addToHistory(product);
     navigate(`/product-detail/${product.id}`);
   };
@@ -115,11 +141,11 @@ export const FavoritesPage: React.FC = () => {
   };
 
   const handleSelectAll = () => {
-    setSelectedItems((prev) =>
-      prev.size === filteredFavorites.length
-        ? new Set()
-        : new Set(filteredFavorites.map((p) => p.id)),
-    );
+    if (selectedItems.size === filteredFavorites.length) {
+      setSelectedItems(new Set());
+    } else {
+      setSelectedItems(new Set(filteredFavorites.map((p) => p.id)));
+    }
   };
 
   const handleDeleteSelected = () => {
@@ -127,6 +153,23 @@ export const FavoritesPage: React.FC = () => {
     selectedItems.forEach(toggleFavorite);
     showError(`Đã xóa ${selectedItems.size} khóa học khỏi danh sách yêu thích`);
     setSelectedItems(new Set());
+    setIsSelectionMode(false);
+  };
+
+  // Selection mode handlers
+  const handleToggleSelectionMode = () => {
+    setIsSelectionMode(!isSelectionMode);
+    setSelectedItems(new Set());
+  };
+
+  const handleToggleSelection = (productId: string) => {
+    const newSelected = new Set(selectedItems);
+    if (newSelected.has(productId)) {
+      newSelected.delete(productId);
+    } else {
+      newSelected.add(productId);
+    }
+    setSelectedItems(newSelected);
   };
 
   const handleShareFavorites = () => {
@@ -162,6 +205,7 @@ export const FavoritesPage: React.FC = () => {
     );
     return total / favoriteProducts.length;
   }, [favoriteProducts]);
+
   return (
     <>
       <Helmet>
@@ -284,31 +328,89 @@ export const FavoritesPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* View Mode and Actions */}
+              {/* Actions */}
               <div className="flex items-center gap-2">
+                {/* List count result */}
+                <div className="mr-4 flex items-center gap-2 text-sm text-gray-500">
+                  <Eye size={16} />
+                  <span>
+                    Hiển thị {filteredFavorites.length} / {favoritesCount} mục
+                  </span>
+                </div>
+
                 <button
-                  onClick={handleSelectAll}
-                  className="rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-200"
+                  onClick={handleToggleSelectionMode}
+                  disabled={favoritesCount === 0}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-white shadow-sm transition-all duration-200 hover:shadow-md disabled:opacity-50 ${
+                    isSelectionMode
+                      ? 'bg-gray-500 hover:bg-gray-600'
+                      : 'bg-orange-500 hover:bg-orange-600'
+                  }`}
                 >
-                  {selectedItems.size === filteredFavorites.length
-                    ? 'Bỏ chọn tất cả'
-                    : 'Chọn tất cả'}
+                  {isSelectionMode ? (
+                    <X size={20} />
+                  ) : (
+                    <CheckSquare size={20} />
+                  )}
+                  <span className="font-medium">
+                    {isSelectionMode ? 'Hủy chọn' : 'Chọn để xóa'}
+                  </span>
                 </button>
 
-                {selectedItems.size > 0 && (
-                  <button
-                    onClick={handleDeleteSelected}
-                    className="flex items-center gap-2 rounded-lg bg-red-100 px-3 py-2 text-red-700 transition-colors hover:bg-red-200"
-                  >
-                    <Trash2 size={16} />
-                    Xóa ({selectedItems.size})
-                  </button>
+                {!isSelectionMode && (
+                  <>
+                    {selectedItems.size > 0 && (
+                      <button
+                        onClick={handleDeleteSelected}
+                        className="flex items-center gap-2 rounded-lg bg-red-100 px-3 py-2 text-red-700 transition-colors hover:bg-red-200"
+                      >
+                        <Trash2 size={16} />
+                        Xóa ({selectedItems.size})
+                      </button>
+                    )}
+                  </>
                 )}
               </div>
             </div>
           </div>
         )}
-
+        {/* Selection Mode Controls */}
+        {isSelectionMode && (
+          <div className="rounded-xl border border-orange-200 bg-orange-50 p-4 shadow-sm">
+            <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleSelectAll}
+                  className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-gray-700 shadow-sm transition-colors duration-200 hover:bg-gray-50"
+                >
+                  {selectedItems.size === filteredFavorites.length ? (
+                    <CheckSquare size={20} className="text-orange-600" />
+                  ) : (
+                    <Square size={20} className="text-gray-400" />
+                  )}
+                  <span className="font-medium">
+                    {selectedItems.size === filteredFavorites.length
+                      ? 'Bỏ chọn tất cả'
+                      : 'Chọn tất cả'}
+                  </span>
+                </button>
+                <span className="text-sm text-gray-600">
+                  Đã chọn: {selectedItems.size}/{filteredFavorites.length}
+                </span>
+              </div>
+              <button
+                onClick={handleDeleteSelected}
+                disabled={selectedItems.size === 0}
+                className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white shadow-sm transition-colors duration-200 hover:bg-red-600 disabled:opacity-50"
+              >
+                <Trash2 size={20} />
+                <span className="font-medium">
+                  Xóa đã chọn ({selectedItems.size})
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
         {/* Products Grid */}
         <div className="rounded-xl border border-gray-200 bg-white shadow-sm">
           {filteredFavorites.length === 0 ? (
@@ -338,7 +440,7 @@ export const FavoritesPage: React.FC = () => {
               <div className="mb-4">
                 <h2 className="text-xl font-semibold">
                   {filteredFavorites.length} khóa học yêu thích
-                  {searchTerm && ` cho "${searchTerm}"`}
+                  {debouncedSearchTerm && ` cho "${debouncedSearchTerm}"`}
                 </h2>
               </div>
 
@@ -348,6 +450,10 @@ export const FavoritesPage: React.FC = () => {
                 onToggleFavorite={handleLike}
                 onViewDetails={handleViewDetails}
                 emptyMessage="Không tìm thấy khóa học nào phù hợp với bộ lọc của bạn."
+                // Props for selection mode
+                isSelectionMode={isSelectionMode}
+                selectedItems={selectedItems}
+                onToggleSelection={handleToggleSelection}
               />
 
               {totalPages > 1 && (

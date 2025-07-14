@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, Star, Users, Clock, Tag } from 'lucide-react';
+import { Heart, Star, Users, Clock, Tag, Check } from 'lucide-react';
 import { Product } from '../../types/product';
 import { formatPrice } from '../../utils/formatters';
 
@@ -9,6 +9,9 @@ interface ProductCardProps {
   onToggleFavorite?: (productId: string) => void;
   onViewDetails?: (product: Product) => void;
   className?: string;
+  isSelectionMode?: boolean;
+  isSelected?: boolean;
+  onToggleSelection?: (productId: string) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -17,6 +20,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   onToggleFavorite,
   onViewDetails,
   className = '',
+  isSelectionMode = false,
+  isSelected = false,
+  onToggleSelection,
 }) => {
   const handleFavoriteToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -24,7 +30,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   };
 
   const handleViewDetails = () => {
-    onViewDetails?.(product);
+    if (isSelectionMode) {
+      onToggleSelection?.(product.id);
+    } else {
+      onViewDetails?.(product);
+    }
+  };
+
+  const handleSelectionToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onToggleSelection?.(product.id);
   };
 
   const discountedPrice = product.discount
@@ -59,8 +74,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div
-      className={`relative cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${className}`}
+      className={`relative cursor-pointer overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${
+        isSelectionMode && isSelected
+          ? 'border-blue-500 bg-blue-50 shadow-lg'
+          : 'border-gray-200 bg-white shadow-md'
+      } ${className}`}
+      onClick={handleViewDetails}
     >
+      {/* Selection overlay */}
+      {isSelectionMode && isSelected && (
+        <div className="z-5 pointer-events-none absolute inset-0 bg-blue-500/10" />
+      )}
+
       {/* Badges */}
       <div className="absolute left-3 top-3 z-10 flex flex-col gap-1">
         {product.isNew && (
@@ -80,18 +105,40 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         )}
       </div>
 
-      {/* Favorite Button */}
-      <button
-        className={`absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${
-          isFavorite
-            ? 'bg-white text-red-500 hover:bg-red-50'
-            : 'bg-white/90 text-gray-600 hover:bg-white hover:text-red-500'
-        } hover:scale-110`}
-        onClick={handleFavoriteToggle}
-        aria-label={isFavorite ? 'Xóa khỏi yêu thích' : 'Thêm vào yêu thích'}
-      >
-        <Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
-      </button>
+      {/* Top right controls */}
+      <div className="absolute right-3 top-3 z-10 flex flex-col gap-2">
+        {/* Selection checkbox (only in selection mode) */}
+        {isSelectionMode && (
+          <button
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${
+              isSelected
+                ? 'bg-blue-500 text-white'
+                : 'bg-white/90 text-gray-600 hover:bg-white hover:text-blue-500'
+            } hover:scale-110`}
+            onClick={handleSelectionToggle}
+            aria-label={isSelected ? 'Bỏ chọn' : 'Chọn khóa học'}
+          >
+            <Check size={20} />
+          </button>
+        )}
+
+        {/* Favorite Button (hidden in selection mode) */}
+        {!isSelectionMode && (
+          <button
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${
+              isFavorite
+                ? 'bg-white text-red-500 hover:bg-red-50'
+                : 'bg-white/90 text-gray-600 hover:bg-white hover:text-red-500'
+            } hover:scale-110`}
+            onClick={handleFavoriteToggle}
+            aria-label={
+              isFavorite ? 'Xóa khỏi yêu thích' : 'Thêm vào yêu thích'
+            }
+          >
+            <Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
+          </button>
+        )}
+      </div>
 
       {/* Product Image */}
       <div className="relative h-48 w-full overflow-hidden">
@@ -160,10 +207,20 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         <button
-          className="w-full rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0"
+          className={`w-full rounded-lg px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 ${
+            isSelectionMode
+              ? isSelected
+                ? 'bg-blue-700 hover:bg-blue-800'
+                : 'bg-blue-600 hover:bg-blue-700'
+              : 'bg-blue-600 hover:bg-blue-700'
+          }`}
           onClick={handleViewDetails}
         >
-          Xem chi tiết
+          {isSelectionMode
+            ? isSelected
+              ? 'Đã chọn'
+              : 'Chọn khóa học'
+            : 'Xem chi tiết'}
         </button>
       </div>
     </div>
